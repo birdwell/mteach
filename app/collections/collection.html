@@ -1,0 +1,50 @@
+<div class="container" ng-controller="CollectionCtrl" ng-class="{'no-edit':collection.authorId!==authData.uid}">
+    <div class="col-sm-12">
+        <link rel="stylesheet" href="css/collections.css" media="screen" charset="utf-8">
+        <h1 class="hero-title" style="color:#93c54b;">
+            <input class="plaininput" ng-model="collection.title" ng-disabled="collection.authorId!==authData.uid">
+        </h1>
+        <h2 class="hero-description">
+            <input class="plaininput" ng-model="collection.desc" ng-disabled="collection.authorId!==authData.uid">
+        </h2>
+        <center>
+            <select class="plaininput form-control" style="width:9em;padding-right:0;overflow:visible;border-radius:4px;" ng-model="collection.type" ng-hide="collection.authorId!==authData.uid">
+                <option>Reference</option>
+                <option>Track</option>
+            </select>
+            <span ng-show="collection.authorId!==authData.uid">{{collection.type}}</span>
+        </center>
+        <center>
+            <tags-input style="width:25em;" ng-model="collection.tags" add-on-paste="true" ng-disabled="collection.authorId!==authData.uid">
+                <auto-complete source="tags"></auto-complete>
+            </tags-input>
+        </center>
+        <center ng-show="collection.resources == null" style="margin-top:2em;margin-bottom:2em;">[No resources in this collection]</center>
+        <div class='row resources'>
+            <div ng-repeat="resource in collection.resources" class='col-md-4'>
+                <div class="card resource">
+                    <div class="card-block">
+                        <span class="glyphicon glyphicon-remove deleteResource" ng-click="deleteResource(resource,collection)"aria-hidden="true" ng-hide="collection.authorId!==authData.uid"></span>
+                        <h3>
+                            <input class="plaininput card-title" placeholder="title" ng-model="resource.title" ng-disabled="collection.authorId!==authData.uid">
+                        </h3>
+                        <span class='card-text'>
+                            <p>
+                                <input class="plaininput " placeholder="descriptive text" ng-model="resource.text" ng-disabled="collection.authorId!==authData.uid">
+                            </p>
+                            <p>
+                                <a class="resourceLink" ng-href="{{resource.link}}" onclick="return false;">
+                                    <input class="plaininput" style="width:40em" placeholder="http://link.to.anywhere" ng-model="resource.link" ng-disabled="collection.authorId!==authData.uid">
+                                </a>
+                                <a ng-hide="resource == null" class="btn learn btn-success" ng-href="{{resource.link}}">
+                                    Learn
+                                </a>
+                            </p>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-success newResource" ng-click="newresource()" ng-hide="collection.authorId!==authData.uid">New Resource</button>
+    </div>
+</div>

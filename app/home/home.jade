@@ -1,0 +1,53 @@
+.container(ng-controller='HomeCtrl')
+  .col-sm-12
+    // FORM
+    button.btn.btn-success.addCollection(ng-show='authData !== null', ng-click="showModal=true;resetCollectionForm();") Add Collection
+    .row
+      .collections.col-md-4(ng-repeat='(key, collection) in sortedCollections')
+        .card
+          img.card-img-top(data-src="holder.js/100%x180/?text=Image cap" alt="Card image cap")
+          .card-block
+            h4.card-title
+              a(ng-href='#/collections/{{key}}')  {{collection.title}} 
+              span.byline
+                span(ng-bind="users[collection.authorId].email || 'unknown'")
+            p.card-text
+              | {{collection.desc}}
+              br
+          ul.list-group.list-group-flush
+              li.list-group-item
+                  span.tags
+                    a.tag(ng-repeat='tag in collection.tags', ng-href='#/tags/{{tag.text}}') {{tag.text}}
+          .card-footer.text-muted
+              span.glyphicon.glyphicon-remove.deleteCollection(ng-click='deleteCollection(key, collections)', aria-hidden='true', ng-hide='collection.authorId!==authData.uid')
+              | {{collection.type}}
+              .upvote(style='cursor:pointer;', ng-click='upvote(key)', ng-style="upvoted(collection) && {'color':'#93c54b'} || {'color':'#fff'}")
+                span.arrow ▲
+                span.upvoteNum(ng-bind='countupvotes(collection)')
+    .modal.fade(modal='showModal', close='showModal=false')
+      .modal-dialog
+        .modal-content
+          form(name='userForm', ng-submit='addCollection()', ng-keypress='processKeypress($event)')
+            .modal-header
+              button.close(type='button', ng-click='showModal=false', data-dismiss='modal', aria-label='Close')
+                span(aria-hidden='true') ×
+              h4.modal-title Add Collection
+            .modal-body
+              .form-group
+                label Collection Title: 
+                input.form-control(type='text', name='title', ng-model='newcollection.title')
+              .form-group
+                label(for='sel1') Type:
+                select#sel1.form-control(ng-model='newcollection.type', name='type')
+                  option Reference
+                  option Track
+              .form-group
+                label Description: 
+                input.form-control(type='text', name='description', ng-model='newcollection.description')
+              .form-group
+                label Tags: 
+                tags-input(ng-model='newcollection.tags', add-on-paste='true')
+                  auto-complete(source='tags')
+            .modal-footer
+              button.btn.btn-default(type='button', ng-click='showModal=false', data-dismiss='modal') Close
+              button.btn.btn-primary(type='submit', ng-click='showModal=false') Submit

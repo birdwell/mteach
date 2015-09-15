@@ -1,0 +1,86 @@
+:disabled{
+    background:transparent;
+}
+tags-input[disabled] .tags .input,tags-input[disabled] .tags .tag-item{
+    opacity:1;
+    border:solid 1px #000;
+    background:#666 !important;
+    background-image:none !important;
+    color:#fff;
+}
+tags-input[disabled] .tags{background:white;color:white !important;}
+
+.plaininput{
+    border: none;
+    text-align:inherit;
+    overflow:visible;
+    width:20em;
+    max-width:100%;
+}
+.plaininput:focus{
+    outline:solid 1px #a9a9a9;
+    border-radius:4px;
+}
+.no-edit .plaininput:focus{outline:none;}
+
+.tags .tag-list .tag-item{
+    border:solid 1px #000;
+    background:#666;
+    background-image:none;
+    color:#fff;
+}
+.tags .tag-list .tag-item a.remove-button{
+    color:#ccc;
+}
+.no-edit .tags .tag-list .tag-item a.remove-button{
+    display:none;
+}
+.no-edit .tags{box-shadow:none;}
+.no-edit .host.focused{outline:none;box-shadow:none;border:none;}
+.no-edit .tags .input{display:none;}
+.tags .tag-list .tag-item a.remove-button:hover{
+    text-decoration:none;
+}
+.tags .tag-list .tag-item a.remove-button:active{
+    color:#000;
+    text-decoration:none;
+}
+tags-input div.tags.focused{box-shadow:0 0 3px 1px rgba(0,0,0,0.5);}
+.no-edit tags-input div.tags{display:inline-block;border:none;}
+.no-edit tags-input div.tags.focused{box-shadow:none;}
+.tags{border-radius:4px;}
+
+.resources{
+    padding-top: 15px;
+}
+input.plaininput.card-title {
+    font-size: 1.3rem;
+    text-overflow: ellipsis;
+}
+.resourceLink{
+    text-overflow: ellipsis;
+}
+a.btn.learn.btn-success {
+    padding: 8px;
+    margin-top: 10px;
+}
+.resourceLink input {
+    text-overflow: ellipsis;
+}
+.hero-title, .hero-description {
+    text-align: center;
+}
+.deleteResource{
+    float: right;
+    cursor: pointer;
+}
+
+/* Extra Small Devices, Phones */
+ @media only screen and (max-width : 480px) {
+     .btn.newResource{
+         margin-bottom: 30px;
+     }
+     div.tags {
+         width: 320px;
+    }
+ }

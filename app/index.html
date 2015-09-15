@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+
+<!--[if gt IE 8]><!-->
+<html lang="en" ng-app="mteach" class="no-js">
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>MTeach</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet" href="css/custom.min.css" media="screen" charset="utf-8">
+  <link rel="stylesheet" href="https://mbenford.github.io/ngTagsInput/css/ng-tags-input.min.css" />
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.css" media="screen" title="no title" charset="utf-8">
+</head>
+
+<body ng-controller="mteachCtrl">
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#/view1" style="padding:0;">
+          <img src="mteach_logo_white_small.png" style="height:3em;margin:0.2em;">
+        </a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li><a href="#/view1">Home</a></li>
+        </ul>
+
+        <span>
+          <ul class="nav navbar-nav login navbar-right">
+            <span ng-show="authData !== null">
+              <a href="#/users/{{authData.uid}}">
+                <li class="btn btn-default">{{email}}</li>
+              </a>
+              <li class="btn btn-default" ng-click="logout()">Log out</li>
+            </span>
+            <span ng-show="authData === null">
+              <li class="btn btn-default" ng-click="mode='loggingin'">Log in</li>
+              <li class="btn btn-default" ng-click="mode='registering'">Register</li>
+            </span>
+          </ul>
+        </span>
+      </div>
+    </div>
+  </nav>
+  <div modal="authData===null && (mode=='registering' || mode=='loggingin')" class="modal fade" close="mode=null">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form name="userForm">
+          <div class="modal-header">
+            <button type="button" ng-click="mode=null" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title">Log In</h4>
+          </div>
+          <div class="modal-body">
+            <div class="alert alert-warning" ng-bind="errmsg" ng-show="errmsg"></div>
+            <label style="display:block;">Email:
+              <input class="form-control" type="email" ng-model="user.email" placeholder="Email">
+            </label>
+            <label style="display:block;">Password:
+              <input class="form-control" type="password" ng-model="user.password" placeholder="Password">
+            </label>
+            <label style="display:block;" ng-show="mode=='registering'" class="ng-hide">Confirm Password:
+              <input class="form-control" type="password" ng-model="confpass" placeholder="Confirm Password">
+            </label>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary" ng-show="mode=='loggingin'" ng-click="login()">Log in</button>
+            <button class="btn btn-primary" ng-show="mode=='registering'" ng-click="register()">Register</button>
+            <button class="btn btn-default" ng-click="mode=null">Cancel</button>
+          </div>
+        </form>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
+
+  <div ng-view class="mainContent container"></div>
+  <!-- In production use:
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+  -->
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="js/angular-ui-bootstrap-modal.js"></script>
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+  <!-- Firebase -->
+  <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+
+  <!-- AngularFire -->
+  <script src="https://cdn.firebase.com/libs/angularfire/1.1.2/angularfire.min.js"></script>
+  <script src="js/ctrls/user.js"></script>
+  <script src="app.js"></script>
+  <script src="profiles/profile.js"></script>
+  <script src="collections/collection.js"></script>
+  <script src="https://mbenford.github.io/ngTagsInput/js/ng-tags-input.min.js"></script>
+  <script src="home/home.js"></script>
+</body>
+
+</html>
