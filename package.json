@@ -4,15 +4,17 @@
   "version": "0.0.0",
   "description": "A collection of epic learning resources",
   "license": "MIT",
-  "devDependencies": {
+  "dependencies": {
     "bower": "^1.3.1",
-    "http-server": "^0.6.1",
+    "express": "^4.13.3",
+    "http-server": "^0.6.1"
+  },
+  "devDependencies": {
     "shelljs": "^0.2.6"
   },
   "scripts": {
-    "postinstall": "bower install",
-
     "prestart": "npm install",
+    "postinstall": "./node_modules/bower/bin/bower install",
     "start": "http-server -a localhost -p 8000 -c-1"
   }
 }
